@@ -14,7 +14,7 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
     height = 500 - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
-    .rangeRoundBands([0, width],.1); //width-100 to make room for the legend.
+    .rangeRoundBands([0, width],.1); 
 
   var yScale = d3.scale.linear()
     .rangeRound([height, 0]);
@@ -32,7 +32,7 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
 
   var svgContainer = d3.select("#chartID").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("height", height + margin.top + margin.bottom+100)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -52,7 +52,10 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
     var xAxis_g = svgContainer.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + (height) + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .selectAll("text")
+      .attr("transform","rotate(-45)")
+      .attr("x",-40);
 
     var yAxis_g = svgContainer.append("g")
           .attr("class", "y axis")
@@ -63,10 +66,10 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
           .style("text-anchor", "end").text("Percentage");
 
   var state = svgContainer.selectAll(".state")
-    .data(data)
-    .enter().append("g")
-    .attr("class", "g")
-    .attr("transform", function(d) { return "translate(" + xScale(d.moduleName) + ",0)"; });
+      .data(data)
+      .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + xScale(d.moduleName) + ",0)"; });
 
     state.selectAll("rect")
       .data(function(d) { return d.ages; })
@@ -79,20 +82,16 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
        d3.select(window).on('resize', resize); 
 
  function resize() {
- console.log('----resize function----');
   // update width
    width = parseInt(d3.select('#chartID').style('width'), 10);
    width = width - margin.left - margin.right;
 
   height = parseInt(d3.select("#chartID").style("height"));
-   height = height - margin.top - margin.bottom;
-  console.log('----resiz width----'+width);
-  console.log('----resiz height----'+height);
+  height = height - margin.top - margin.bottom;
      // resize the chart
    if(width<870){
-     //xScale.range([0, width]);
      xScale.rangeRoundBands([0, width], .1);
-     yScale.range([height, 0]);
+     yScale.range([height+100, 0]);
 
      yAxis.ticks(Math.max(height/50, 2));
      xAxis.ticks(Math.max(width/50, 2));
@@ -100,15 +99,12 @@ var margin = {top: 30, right: 10, bottom: 20, left: 80},
      d3.select(svgContainer.node().parentNode)
          .style('width', (width + margin.left + margin.right) + 'px');
 
-     /*svgContainer.selectAll('.bar')
-      .attr("x", function(d) { return xScale(d.moduleName); })
-       .attr("width", xScale.rangeBand());*/
-
+    svgContainer.selectAll(".g").attr("transform", function(d) { return "translate(" + xScale(d.moduleName) + ",0)"; });
 
      svgContainer.selectAll("rect")
                  .attr("x",function(d) { return d.moduleName; })
                  .attr("width", xScale.rangeBand())
 
-     svgContainer.select('.x.axis').call(xAxis.orient('bottom')); 
+     svgContainer.select('.x.axis').call(xAxis.orient('bottom')).selectAll("text").attr('dy','0.5em').attr('dx','-3em'); 
    }  
  }
