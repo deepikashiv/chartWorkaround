@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Heat Map</title>
+        <style type="text/css">
+            .tick>text{
+                transform: rotate(-45deg);
+                font-family: 'Open Sans';
+                font-size: 13px;
+                stroke: #424242;
+                stroke-width: 1px;
+                font-weight: lighter;
+                letter-spacing: 0.03em;
+            }
+            .x.axis{
+                stroke: lightgray;
+                stroke-width: 1px;
+                max-width: 960px !important;
+                overflow: auto;
+            }
+            .y.axis{
+                stroke: lightgray;
+                stroke-width: 4px;
+            }
+            text {
+                fill: #fff;
+                font-size: 16px;
+            }
+
+            .rectLabel {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="chartID"></div>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	    <script src ="js/d3ResponsiveHeatMap.js"></script>
+    </body>
+</html>
