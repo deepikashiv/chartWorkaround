@@ -1,0 +1,52 @@
+<!doctype html>
+  <html lang="en">
+  <meta charset="utf-8">
+    <head>
+      <title>D3 Stacked Bar- With Navigation</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        
+    </head>
+    <style>
+      .axis path,
+      .axis line {
+        fill: #DDD;
+        stroke: #DDD;
+      }
+      .axis text {
+      	font-family: 'Open Sans regular', 'Open Sans';
+      	font-size: 13px;
+        /*display: none;*/
+      }
+      .bar {
+        fill: #8bc34a;
+      }
+      .bar:hover {
+        fill: #039be4;
+      }
+      #prev {
+        float: left;
+      }
+      #next {
+        float: right;
+      }
+      .fa-4 {
+        font-size: 3em;
+      }
+
+    </style>
+    <body>
+      <div>
+        <div>
+          <i class="fa fa-caret-left fa-4" id='prev'></i>
+        </div>
+        <div>
+          <i class="fa fa-caret-right fa-4" id='next'></i>
+        </div>
+        <div id ="chartID"></div>         
+      </div>
+    </body>
+    
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/navigationalStackedBars.js"></script>
+  </html>
