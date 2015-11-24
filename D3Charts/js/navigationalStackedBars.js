@@ -97,9 +97,7 @@ var axes = svgContainer.selectAll(".x axis")
       })
       .attr("transform", "translate(0," + (height+50) + ")");
 
-    axes.selectAll('circle')
-      .data(change_data)
-      .enter().append('circle')
+    axes.append('circle')
       .attr("class","click points")
       .transition()
       .duration(800)  // <-- Now this is new!
